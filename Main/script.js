@@ -105,30 +105,26 @@ $(document).ready(function() {
     });
   }
 
-  function getUVIndex(lat, lon) {
+  function uvIndexAPI(cityNameAndDate, weatherImage, temperature, humidity, windSpeed, lat, long) {
+
+    var queryUrl = "https://api.openweathermap.org/data/2.5/uvi?lat=" + lat + "&lon=" + long + "&appid=" + apiKey;
+
     $.ajax({
-      type: "GET",
-      url: "http://api.openweathermap.org/data/2.5/uvi?appid=7ba67ac190f85fdba2e2dc6b9d32e93c&lat=" + lat + "&lon=" + lon,
-      dataType: "json",
-      success: function(data) {
-        var uv = $("<p>").text("UV Index: ");
-        var btn = $("<span>").addClass("btn btn-sm").text(data.value);
-        
-        // change color depending on uv value
-        if (data.value < 3) {
-          btn.addClass("btn-success");
-        }
-        else if (data.value < 7) {
-          btn.addClass("btn-warning");
-        }
-        else {
-          btn.addClass("btn-danger");
-        }
-        
-        $("#today .card-body").append(uv.append(btn));
-      }
-    });
-  }
+        url: queryUrl,
+        method: "Get"
+    }).then(function(response) {
+        var indexValue = 7;
+        var uvIndexPTag = $("<p>");
+        uvIndexPTag.text("UV Index: ");
+        uvIndexPTag.addClass("uv-ptag");
+        var uvIndexValue = $("<p>");
+        uvIndexValue.text(response.value);
+        uvIndexValue.addClass("uv-value");
+        uvIndexValue.attr("id", "25b");
+
+        uvIndexPTag.append(uvIndexValue);
+
+
 
   // get current history, if any
   var history = JSON.parse(window.localStorage.getItem("history")) || [];
@@ -140,4 +136,4 @@ $(document).ready(function() {
   for (var i = 0; i < history.length; i++) {
     makeRow(history[i]);
   }
-});
+}
