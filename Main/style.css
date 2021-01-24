@@ -1,0 +1,29 @@
+* {
+    margin: none;
+    padding: none;
+    box-sizing: border-box;
+}
+
+body {
+    /* background: linear-gradient(to right top, #2881ca, #2f81b8); */
+    background-image: url("../images/clouds1.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: 100vh;
+}
+
+.navbar {
+    background: rgba(255, 255, 255, 0);
+    color: black;
+    margin-bottom: 10px;
+}
+
+main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.container-fluid {
+    margin: 0 0 1rem 1rem;
+}
